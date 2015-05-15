@@ -3,7 +3,6 @@
 * Package com.leemoo.batch 
 * Description: TODO
 * Author LeeMoo
-* Date 2015年5月13日 下午4:16:14 
 * Version V1.0
 * Copyright(C) CITICS 2014-2018, All Rights Reserved
 */ 
@@ -22,23 +21,26 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.ItemReader;
+import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /** 
  * ClassName: EmployeeReader <br/> 
- * date: 2015年5月13日 下午4:16:14 <br/> 
  * 
  * @author LeeMoo
  * @version  
  * @since JDK 1.7
  */
-@Component("employeeReader")
+@Component("employeeService")
 @Scope("step")
-public class EmployeeReader implements ItemReader<String> {
+public class EmployeeService implements ItemReader<String>, ItemWriter<String> {
+	
+	public EmployeeService() {
+		
+	}
 	
 	private String companyId;
 	
@@ -77,6 +79,12 @@ public class EmployeeReader implements ItemReader<String> {
 		} finally {
 			IOUtils.closeQuietly(response);
 		}
+	}
+
+	@Override
+	public void write(List<? extends String> items) throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 
 	

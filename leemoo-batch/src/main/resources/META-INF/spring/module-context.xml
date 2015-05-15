@@ -10,12 +10,17 @@
  	<batch:job id="job1">
 		<batch:step id="getCompany" next="getEmployee">
 			<batch:tasklet start-limit="100" >
-				<batch:chunk reader="employeeReader" writer="employeeWriter" commit-interval="1" />
+				<batch:chunk reader="companyService" writer="companyService" commit-interval="1" />
 			</batch:tasklet>
 		</batch:step>
-		<batch:step id="getEmployee">
+		<batch:step id="getEmployee" next="getPhoto">
 			<batch:tasklet transaction-manager="transactionManager" start-limit="100" >
-				<batch:chunk reader="employeeReader" writer="employeeWriter" commit-interval="1" />
+				<batch:chunk reader="employeeService" writer="employeeService" commit-interval="1" />
+			</batch:tasklet>
+		</batch:step>
+		<batch:step id="getPhoto">
+			<batch:tasklet transaction-manager="transactionManager" start-limit="100" >
+				<batch:chunk reader="photoService" writer="photoService" commit-interval="1" />
 			</batch:tasklet>
 		</batch:step>
 	</batch:job>
